@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasir Billiard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Kasir Billiard</h1>
+    <p id="tgl"></p>
+  </div>
+  <nav class="tabs" aria-label="Menu utama">
+    <button class="on" data-tab="meja">Meja</button>
+    <button data-tab="riwayat">Riwayat pesanan</button>
+    <button data-tab="booking">Booking</button>
+  </nav>
+  <div class="omzet">
+    <span>Pendapatan hari ini</span>
+    <strong id="omzetHari">Rp 0</strong>
+  </div>
+</header>
+
+<main>
+  <section id="tab-meja" class="tab on">
+    <div id="gridMeja" class="grid"></div>
+  </section>
+
+  <section id="tab-riwayat" class="tab">
+    <div class="bar">
+      <input id="cari" type="search" placeholder="Cari nama pembeli atau nomor struk">
+      <p id="ringkas"></p>
+      <button id="hapusRiwayat" class="ghost">Hapus semua riwayat</button>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Waktu</th><th>No. struk</th><th>Pembeli</th><th>Meja</th><th>Lama main</th><th>Tarif per jam</th><th>Biaya main</th><th>Menu</th><th>Diskon</th><th>Total</th><th>Tunai</th><th>Kembali</th><th></th></tr>
+        </thead>
+        <tbody id="isiRiwayat"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-booking" class="tab">
+    <form id="formBooking" class="bar book">
+      <input id="bkNama" placeholder="Nama pemesan" required>
+      <select id="bkMeja"></select>
+      <input id="bkTgl" type="date" required>
+      <input id="bkJam" type="time" required>
+      <input id="bkDurasi" type="number" min="1" value="1" title="Durasi (jam)">
+      <button class="gold">Simpan booking</button>
+    </form>
+    <div id="listBooking" class="scroll"></div>
+  </section>
+</main>
+
+<dialog id="dlgMulai">
+  <form id="formMulai" class="pnl">
+    <h2 id="mTitle">Mulai main</h2>
+    <label>Nama pembeli<input id="mNama" required autocomplete="off"></label>
+    <div class="act">
+      <button type="button" class="ghost" id="mBatal">Batal</button>
+      <button class="gold">Mulai hitung waktu</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgBayar">
+  <div class="pnl wide">
+    <h2 id="bTitle"></h2>
+    <h3>Tambah menu</h3>
+    <div id="bMenu" class="menu"></div>
+    <div class="row">
+      <label>Diskon
+        <select id="dTipe"><option value="persen">Persen (%)</option><option value="rp">Rupiah (Rp)</option></select>
+      </label>
+      <label>Nilai diskon<input id="dNilai" type="number" min="0" value="0"></label>
+    </div>
+    <dl id="rincian"></dl>
+    <div class="row">
+      <label>Uang diterima (tunai)<input id="uang" type="number" min="0" placeholder="0"></label>
+      <button type="button" class="ghost" id="uangPas">Uang pas</button>
+    </div>
+    <p class="kembali">Kembalian <strong id="kembali">Rp 0</strong></p>
+    <div class="act">
+      <button type="button" class="ghost" id="bBatal">Batal</button>
+      <button type="button" class="gold" id="bBayar" disabled>Bayar dan cetak struk</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="dlgStruk">
+  <div class="pnl">
+    <pre id="struk"></pre>
+    <div class="act">
+      <button class="ghost" id="sTutup">Tutup</button>
+      <button class="gold" id="sCetak">Cetak struk</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
